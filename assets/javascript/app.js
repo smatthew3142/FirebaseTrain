@@ -11,6 +11,7 @@
   firebase.initializeApp(config);
 
   var database = firebase.database();
+  var currentTime = moment();
 
   //Button for adding Train
   $("#submitTrain").on("click", function(event) {
@@ -19,8 +20,8 @@
   // Grabs user input
   var trainName = $("#name").val().trim();
   var trainDestination = $("#destination").val().trim();
-  var trainFrequency = moment($("#minutes").val().trim(), "m").format("X");
-  var trainFirst = moment($("#firstTime").val().trim(),"hh:mm A").format("X");
+  var trainFrequency = $("#minutes").val().trim();
+  var trainFirst = $("#firstTime").val().trim();
 
   // Creates local train object
   var newTrain = {
@@ -46,3 +47,40 @@
   $("#minutes").val("");
   $("#firstTime").val("");
 });
+
+
+database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+
+  console.log(childSnapshot.val());
+
+  // Store invariables
+  var trainName = childSnapshot.val().name;
+  var trainDestination = childSnapshot.val().destination;
+  var trainFrequency = childSnapshot.val().frequency;
+  var trainFirst = childSnapshot.val().first;
+
+  console.log(trainName);
+  console.log(trainDestination);
+  console.log(trainFrequency);
+  console.log(trainFirst);
+
+  
+  var formatFirst = moment(trainFirst, "hh:mm A");
+
+  var difference = currentTime.diff(moment(formatFirst), "minutes");
+
+  // Calculate next train
+  
+  
+  var remainder = difference % trainFrequency;
+  var minAway = trainFrequency - remainder;
+  console.log(minAway);
+  var trainNext = moment().add(minAway, "minutes").format("hh:mm A");
+  console.log(trainNext);
+  
+
+  // Add each train's data into the table
+  $("#schedule-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" +
+  trainFrequency + "</td><td>" + trainFirst + "</td><td>" + trainNext + "</td><td>" + minAway + "</td></tr>");
+});
+

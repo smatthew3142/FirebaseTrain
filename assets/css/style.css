@@ -6,11 +6,15 @@ html, body {
 }
 
 body {
-
-font-family: 'Vollkorn SC', Times, Times New Roman, serif;
-
+  background-image: url("../images/nature-rail.jpg");
+  background-position: 10%; 
+  background-size: 1920px;
+ 
 }
 
-h1, h2, h3 {
-  font-family: 'Vollkorn SC', Times, Times New Roman, serif; !Important
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #71c4b2 !Important;
+    color: white !Important;
+
 }
