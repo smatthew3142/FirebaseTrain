@@ -5,8 +5,22 @@ html, body {
   padding: 0;
 }
 
+h1, h2 {
+  color: white !Important;
+}
+
+.jumbotron {
+  margin: 10px;
+  background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../images/giphy.gif")no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding: 1px;
+  
+}
+
+
 body {
-  background-image: url("../images/nature-rail.jpg");
+  background-image: url("../images/grey.png");
   background-position: 10%; 
   background-size: 1920px;
  
@@ -14,7 +28,12 @@ body {
 
 .panel > .panel-heading {
     background-image: none;
-    background-color: #71c4b2 !Important;
+    background-color: #b52d3f !Important;
     color: white !Important;
 
+}
+
+button {
+  background-color: #b52d3f !Important;
+  border-style: none;
 }
